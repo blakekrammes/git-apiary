@@ -1,0 +1,45 @@
+html, body { 
+  margin: 5px;
+  padding: 0;
+}
+
+img {
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+
+.container {
+  position: relative;
+}
+
+.titleText {
+  color: black;
+  position: absolute;
+  left: 10px;
+  bottom: -13px;
+}
+
+.js-search-results {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.message-appender {
+  width: 300px;
+}
+
+.resultLI a {
+  margin-left: 5px;
+  color: grey;
+  text-decoration: none;
+}
+
+.resultLI a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+.pageNumber {
+  width: 300px;
+  height: 300px;
+}
