@@ -1,0 +1,71 @@
+
+/* initial state */
+.hex {
+    margin-top: 11.6px;
+    width: 34.7px;
+    height: 20px;
+    background: black;
+    position: relative;
+}
+.hex:before, .hex:after {
+    content:"";
+    border-left: 17.3px solid transparent;
+    border-right: 17.3px solid transparent;
+    position: absolute;
+}
+.hex:before {
+    top: -9.8px;
+    border-bottom: 10px solid black;
+}
+.hex:after {
+    bottom: -9.8px;
+    border-top: 10px solid black;
+}
+.hex.inner2 {
+  background:rgba(100, 100, 100, 0.5);
+    transform: scale(.8, .8);
+    z-index:2;
+    transition: linear .2s;
+}
+.hex.inner2:before {
+    border-bottom: 9.7px solid rgba(100, 100, 100, 0.5);
+    transition: linear .2s;
+}
+.hex.inner2:after {
+    border-top: 9.9px solid rgba(100, 100, 100, 0.5);
+    transition: linear .2s;
+} 
+
+/* on hover */
+.hex.inner2.hovering {
+    background: rgba(99, 96, 96, .4);
+    transform: scale(.8, .8);
+    z-index:2;
+    transition: linear .2s;
+}
+.hex.inner2.hovering:before {
+    border-bottom: 9.7px solid rgba(99, 96, 96, .4);
+    transition: linear .2s;
+}
+.hex.inner2.hovering:after {
+    border-top: 9.9px solid rgba(99, 96, 96, .4);
+    transition: linear .2s;
+}
+
+
+//code to whiten
+.hex.inner2.whiten {
+  background: white;
+    transform: scale(.8, .8);
+    z-index:2;
+    transition: linear .2s;
+}
+.hex.inner2.whiten:before {
+    border-bottom: 9.7px solid white;
+    transition: linear .2s;
+}
+.hex.inner2.whiten:after {
+    border-top: 9.9px solid white;
+    transition: linear .2s;
+} 
+

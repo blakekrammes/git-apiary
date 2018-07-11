@@ -78,7 +78,7 @@ function displayResults(data) {
   } // end of condition to check if data is a valid object
   else {
     $('.no-results-message').css('display', 'block');
-    $('.message-appender').html(`<p class="no-results-message">No Results. If Searching by Category, Try 'Food', 'Shopping', etc.</p>`);
+    $('.message-appender').html(`<p class="no-results-message">No Public API Results. If Searching by Category, Try 'Food', 'Shopping', etc.</p>`);
     $('.result-text, .public-api-search-results, .pagination').css('display', 'none');
     $('.next-token').prop('hidden', 'true');
   }
@@ -195,7 +195,7 @@ function getDataFromYoutubeApi(youtubeTerm, youtubeCallback) {
 //a function to create the result <li> for youtube search
 function createYoutubeLI(youtubeResult) {
   const youtubeResultLI = (`
-  <li class="youtubeResultLI"><a href="${YOUTUBE_VIDEO_URL}${youtubeResult.id.videoId}"><img src="${youtubeResult.snippet.thumbnails.medium.url}" alt="videoImage"><span class="youtube-title">${youtubeResult.snippet.title}</span></a></li>`);
+  <li class="youtube-li"><a class="youtube-link" href="${YOUTUBE_VIDEO_URL}${youtubeResult.id.videoId}"><div class="youtube-thumbnail-container"><img src="${youtubeResult.snippet.thumbnails.medium.url}" alt="videoImage" class="youtube-thumbnail"><div class="youtube-thumbnail-title">${youtubeResult.snippet.title}</div></div></a></li>`);
   return youtubeResultLI;
 }
 
@@ -264,12 +264,12 @@ function watchSubmit() {
     $('.no-results-message').css('display', 'none');
     $('.prev-token').prop('hidden', true);
     $('.prev-git-token').prop('hidden', true);
-    const queryTarget = $('#js-query');
-    const searchWord = queryTarget.val();
+    const searchTarget = $('#search-input');
+    const searchWord = searchTarget.val();
     let githubLink = createGithubSearchLink(searchWord);
     let youtubeLink = createYoutubeSearchLink(searchWord);
     // reset input val
-    queryTarget.val('');
+    searchTarget.val('');
     if ($('#category-box').is(':checked')) {
       $('.git-div, .youtube-div').css('display', 'none');
       $('.pub-api-div').css('display', 'block');
@@ -281,6 +281,7 @@ function watchSubmit() {
       getDataFromGithubApi(searchWord, displayGitResults);
       $('.githubSearchLink').html(`<a href="${githubLink}">Continue on Github</a>`);
     }
+    // fix this functionality!!!
     else if ($('#youtube-box').is(':checked')) {
       $('.pub-api-div, .git-div').css('display', 'none');
       $('.youtube-div').css('display', 'block');
@@ -307,4 +308,125 @@ function watchSubmit() {
 }
 
 watchSubmit();
+
+// code to conditionally style html elements––––––––––
+
+// changing search input/button colors based on focus
+$('#search-input').focus(function() {
+    $('#search-button').css({'color': 'rgb(114, 131, 156)',
+'transition': 'linear .2s'});
+    $('#search-input').css({'background': 'white',
+      'transition': 'linear .2s', 'color': 'black'});
+});
+
+$('#search-input').focusout(function() {
+  $('#search-button').css({'color': 'white', 'transition': 'linear .2s'});
+  $('#search-input').css({'background': 'rgba(103, 105, 109, .6)', 'transition': 'linear .2s', 'color': 'white'});
+});
+
+// changing search input/button colors based on hover
+$('#search-button, #search-input').mouseenter(function(){
+  if ($('#search-input').is(':focus')) {
+    $('#search-input').css({'background': 'white', 'transition': 'linear .2s'});
+  }
+  else {
+    $('#search-input').css({'background': 'rgba(124, 126, 129, 0.6)', 'transition': 'linear .2s'});
+  }
+});
+$('#search-button, #search-input').mouseleave(function(){
+  if ($('#search-input').is(':focus')) {
+  $('#search-input').css({'background': 'white', 'transition': 'linear .2s', 'outline': '0'});
+  }
+  else {
+    $('#search-input').css({'background': 'rgba(103, 105, 109, .6)', 'transition': 'linear .2s'});
+  }
+});
+
+
+
+
+//control hover effects of checkboxes
+
+$('.hex').mouseenter(function() {
+  if (!$('#category-box').is(':checked')) {
+    $(this).find('.inner2').addClass('hovering');
+    $('.category-label').find('.inner2').css('background', 'rgba(99, 96, 96, .4)');
+  }
+  if (!$('#github-box').is(':checked')) {
+    $(this).find('.inner2').addClass('hovering');
+  }
+  if (!$('#youtube-box').is(':checked')) {
+    $(this).find('.inner2').addClass('hovering');
+  }
+  if (!$('#yougit-box').is(':checked')) {
+    $(this).find('.inner2').addClass('hovering');
+  }
+  else {
+    $(this).find('.inner2').addClass('hovering');
+    $(this).find('.inner2').addClass('whiten');
+
+  }
+})
+$('.hex').mouseleave(function() {
+  if (!$('#category-box').is(':checked')) {
+    $(this).find('.inner2').removeClass('hovering');
+    $('.category-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+  }
+})
+
+
+// changing checkbox color on click/select
+$('.category-label').click(function() {
+  if (!$('#category-box').is(':checked')) {
+    $('.category-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+    $('.category-label').find('.inner2').removeClass('whiten');
+  }
+  else {
+  $('.category-label').find('.inner2').css('background', 'white');
+    $('.category-label').find('.inner2').addClass('whiten');
+    $('.you-git-label, .youtube-label, .github-label').find('.inner2').removeClass('whiten');
+    $('.github-label, .youtube-label, .you-git-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+  }
+});
+
+
+$('.github-label').click(function() {
+  if (!$('#github-box').is(':checked')) {
+    $('.github-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+    $('.github-label').find('.inner2').removeClass('whiten');
+  }
+  else {
+    $('.github-label').find('.inner2').css('background', 'white');
+    $('.github-label').find('.inner2').addClass('whiten');
+    $('.you-git-label, .youtube-label, .category-label').find('.inner2').removeClass('whiten');
+    $('.category-label, .youtube-label, .you-git-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+  }
+});
+
+$('.youtube-label').click(function() {
+  if (!$('#youtube-box').is(':checked')) {
+    $('.youtube-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+    $('.youtube-label').find('.inner2').removeClass('whiten');
+  }
+  else {
+    $('.youtube-label').find('.inner2').css('background', 'white');
+    $('.youtube-label').find('.inner2').addClass('whiten');
+    $('.you-git-label, .github-label, .category-label').find('.inner2').removeClass('whiten');
+    $('.category-label, .github-label, .you-git-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+  }
+});
+
+$('.you-git-label').click(function() {
+  if (!$('#you-git-box').is(':checked')) {
+    $('.you-git-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+    $('.you-git-label').find('.inner2').removeClass('whiten');
+  }
+  else {
+    $('.you-git-label').find('.inner2').css('background', 'white');
+    $('.you-git-label').find('.inner2').addClass('whiten');
+    $('.youtube-label, .github-label, .category-label').find('.inner2').removeClass('whiten');
+    $('.category-label, .github-label, .youtube-label').find('.inner2').css('background', 'rgba(100, 100, 100, 0.5)');
+  }
+});
+
 

@@ -1,45 +1,295 @@
-html, body { 
-  margin: 5px;
-  padding: 0;
+/* font-family: 'Raleway', sans-serif;
+font-family: 'Merriweather', serif; */
+
+
+/* general stylings */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/736x/2e/70/1f/2e701ff7b888245d5e059cafac5a0005--bee-art-bee-keeping.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 img {
-  margin-top: 35px;
-  margin-bottom: 15px;
+  filter: grayscale(100%);
 }
 
-.container {
+p, h1, h2, a {
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  color: white;
+  transition: linear .2s;
+}
+
+h1 {
+  font-size: 3.5vw;
+  font-family: 'Raleway', serif;
+  color: rgb(248, 239, 174);
+}
+
+h2 {
+  font-size: 2vw;
+  font-family: 'Raleway', serif;
+  color: rgb(248, 239, 174);
+}
+
+.subheading {
+  margin-bottom: 2em;
+}
+
+a, label {
+  text-decoration: none;
+  transition: linear .2s;
+}
+
+a:hover, label:hover {
+  color: rgba(169, 169, 169, .6);
+  transition: linear .2s;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  color: rgb(218, 204, 102);
+}
+
+button {
+  font-family: 'Raleway', serif;
+  font-weight: 900;
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+
+.buttons, .git-buttons, .youtube-buttons {
+  text-align: center; 
+}
+
+html {
+}
+
+body { 
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-template-rows: repeat(12, [col-start] 1fr);
+  height: 100vh;
+}
+
+main {
+  grid-column: col-start / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+} 
+
+.pub-api-div, .git-div {
+  text-align: center;
+  /* background: rgba(184, 134, 11, 0.8); */
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.title-content {
+  grid-column: col-start / span 12;
+  grid-row-start: span 1;
+  /* background: rgba(184, 134, 11, 0.8); */
+  background: rgba(10,48,85,0.95);
+}
+
+.js-search-form {
+  grid-column: col-start / span 12;
+  grid-row-start: span 1;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.checkboxes-div {
+  grid-column: 1fr;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+}
+
+/* checkbox styling */
+
+label {
+  /* font-size: 1.8vw; */
+  cursor: pointer;
+  color: white;
+}
+
+label input {
+  visibility: hidden;/* <-- hide the default checkbox, the rest is to hide and alllow tabbing, which display:none prevents */
+  display:block;
+  height:0;
+  width:0;
+  position:absolute;
+  overflow:hidden;
+}
+
+/* [type=checkbox]:checked + span {/* <-- style its checked state */
+  /* background: white;
+  transition: linear .2s;
+} */
+
+.pub-api-div {
+  grid-column: col-start / span 6;
+  grid-row-start: span 1;
+}
+
+.git-div {
+  grid-column: col-start 7 / span 6;
+  grid-row-start: span 1;
+}
+
+.youtube-div {
+grid-column: col-start / span 12;
+grid-row-start: span 3;
+background: rgba(0, 0, 0, 0.6);
+} 
+
+.input-div {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-template-rows: 1;
+  margin-top: 1em;
+}
+
+#search-input {
+  grid-column: col-start 4 / span 6;
+  grid-row: 1;
+  height: 60px;
+  font-size: 30px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(103, 105, 109, .6);
+  transition: linear .2s;
+  line-height: 30px;
+  padding-left: 70px;
+  color: black;
+}
+
+#search-input:focus, #search-button:focus {
+  outline: 0;
+}
+
+#search-button {
+  grid-column: col-start 4 / span 6;
+  grid-row: 1;
+  height: 4.5vh;
+  border: none;
+  background: none;
+  color: white;
+  transition: linear .2s;
+  width: 45px;
+}
+
+#search-button i {
+  float: left;
+  font-size: 60px;
+  font-weight: 300;
+}
+
+.youtube-api-search-results {
+  width: 100%;
+  display: table;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+}
+
+.youtube-li {
+  display: table-cell;
+}
+
+.youtube-thumbnail-container {
   position: relative;
 }
 
-.titleText {
-  color: black;
+.youtube-thumbnail {
+  width: 100%;
+  height: auto;
+  padding: 0 .5vw;
+}
+
+.youtube-thumbnail-title {
+  font-size: .8vw;
+  width: 18vw;
   position: absolute;
-  left: 10px;
-  bottom: -13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  top: -14%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0; 
+} 
+
+@media only screen and (max-width: 1024px) {
+
+  .youtube-div {
+    margin: 0 auto;
+  }
+
+  .main-container {
+    display: grid;
+    grid-template-columns: repeat(12, [col-start] 1fr);
+    height: 100vh;
+  }
+
+  .pub-api-div {
+  grid-column: col-start / span 12;
+  }
+
+  .public-api-search-results li 
+  {
+    display: inline-block;
+  }
+
+  .git-div {
+    grid-column: col-start / span 12;
+  }
+
+  .github-api-search-results li {
+    display: inline-block;
+  }
+
+  .youtube-api-search-results {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  text-align: center;
+  }
+
+  .youtube-li {
+    display: inline-block;
+    margin: 0;
+  }
+
+  .youtube-thumbnail {
+    padding: 1.9vh 1.2vw;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .youtube-thumbnail-title {
+    font-size: 1.5vw;
+    top: -3%;
+    width: 22vw;
+  }
+
 }
 
-.js-search-results {
-  display: inline-block;
-  font-size: 24px;
-}
-
-.message-appender {
-  width: 300px;
-}
-
-.resultLI a {
-  margin-left: 5px;
-  color: grey;
-  text-decoration: none;
-}
-
-.resultLI a:hover {
-  color: black;
-  text-decoration: underline;
-}
-
-.pageNumber {
-  width: 300px;
-  height: 300px;
-}

@@ -9,59 +9,105 @@
           integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
           crossorigin="anonymous"></script>
     <link href="index.css" rel="stylesheet" type="text/css" />
+    <link href="hexagons.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Raleway:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
     <div class="main-container">
+
+        <div class="title-content">
         <h1>Git Apiary</h1>
-        <h2>Search by title for secure public APIs, related GitHub repositories and YouTube tutorials</h2>
-          <form action="#" class="js-search-form" role="form">
-            <label for="js-query"></label>
-            <input type="text" id="js-query" name="js-query">
-            <button type="submit">Search</button>
-            <label for="category-box">Search Only Public APIs by Category</label>
-            <input type="checkbox" id="category-box" name="title-box"/>
-            <label for="github-box">Search Only GitHub</label>
-            <input type="checkbox" id="github-box" name="github-box"/>
-            <label for="youtube-box">Search Only YouTube</label>
-            <input type="checkbox" id="youtube-box" name="youtube-box"/>
-            <label for="you-git-box">Search Only GitHub and YouTube</label>
-            <input type="checkbox" id="you-git-box" name="you-git-box"/>
-          </form>
+        <h2 class="subheading">Search by title for secure public APIs, related GitHub repositories and YouTube tutorials</h2>
+        </div>
+
+        <form action="#" class="js-search-form" role="form" autocomplete="off">
+    <div class="input-div">
+      <label for="search-input"></label>
+      <input type="text" id="search-input" name="search-input">
+      <button type="submit" id="search-button">
+      <i class="material-icons">search</i>
+      </button>
+    </div>
+
+    <div class="checkboxes-div">
+
+      <label class="category-label" for="category-box">Public APIs by Category
+      <input type="checkbox" id="category-box" name="title-box"/>
+      <div class="hex">
+        <div class="hex inner">
+          <div class="hex inner2"></div>
+        </div>
+      </div>
+      </label>
+
+      <label class="github-label" for="github-box">Only GitHub
+      <input type="checkbox" id="github-box" name="github-box"/>
+      <div class="hex">
+        <div class="hex inner">
+          <div class="hex inner2"></div>
+        </div>
+      </div>
+      </label>
+
+      <label class="youtube-label" for="youtube-box">Only YouTube
+      <input type="checkbox" id="youtube-box" name="youtube-box"/>
+      <div class="hex">
+        <div class="hex inner">
+          <div class="hex inner2"></div>
+        </div>
+      </div>
+      </label>
+
+      <label class="you-git-label"for="you-git-box">Only GitHub & YouTube
+      <input type="checkbox" id="you-git-box" name="you-git-box"/>
+      <div class="hex">
+        <div class="hex inner">
+          <div class="hex inner2"></div>
+        </div>
+      </div>
+      </label>
+
+    </div>
+  </form>
+
           <main role="main" class="js-search-results" aria-live="assertive" hidden>
-            <div class="pub-api-div">
-            <h2 class="result-text"></h2>
-            <ul class="public-api-search-results">
-            </ul>
-            <div class="message-appender"></div>
-            <div class="buttons">
-            <button class="prev-token" hidden>Previous</button>
-            <button class="next-token" hidden>Next</button>
-            <p class="pagination"></p>
+
+            <div class="pub-api-div" region="public-api-results">
+              <h2 class="result-text"></h2>
+              <ul class="public-api-search-results">
+              </ul>
+              <div class="message-appender"></div>
+              <div class="buttons">
+              <button class="prev-token" hidden>Previous</button>
+              <button class="next-token" hidden>Next</button>
+              <p class="pagination"></p>
+              </div>
             </div>
 
-            </div>
-            <div class="git-div">
-            <h2 class="git-result-text"></h2>
-            <ul class="github-api-search-results">
-            </ul>
-            <h2 class="githubSearchLink"></h2>
-            <div class="git-buttons">
-            <button class="prev-git-token" hidden>Previous</button>
-            <button class="next-git-token" hidden>Next</button>
-            </div>
-            <p class="git-pagination"></p>
+            <div class="git-div" region="github-api-results">
+              <h2 class="git-result-text"></h2>
+              <ul class="github-api-search-results">
+              </ul>
+              <h2 class="githubSearchLink"></h2>
+              <div class="git-buttons">
+              <button class="prev-git-token" hidden>Previous</button>
+              <button class="next-git-token" hidden>Next</button>
+              </div>
+              <p class="git-pagination"></p>
             </div>
 
-            <div class="youtube-div">
-            <h2 class="youtube-result-text"></h2>
-            <ul class="youtube-api-search-results">
-            </ul>
-            <h2 class="youtubeSearchLink"></h2>
-            <div class="youtube-buttons">
-            <button class="prev-youtube-token" hidden>Previous</button>
-            <button class="next-youtube-token" hidden>Next</button>
-            </div>
-            <p class="youtube-pagination"></p>
+            <div class="youtube-div" region="github-api-results">
+              <h2 class="youtube-result-text"></h2>
+              <ul class="youtube-api-search-results">
+              </ul>
+              <h2 class="youtubeSearchLink"></h2>
+              <div class="youtube-buttons">
+              <button class="prev-youtube-token" hidden>Previous</button>
+              <button class="next-youtube-token" hidden>Next</button>
+              </div>
+              <p class="youtube-pagination"></p>
             </div>
           </main>
       </div>
