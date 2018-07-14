@@ -1,42 +1,59 @@
-/* font-family: 'Raleway', sans-serif;
-font-family: 'Merriweather', serif; */
-
-
 /* general stylings */
 * {
   box-sizing: border-box;
 }
 
-html {
+html, body { 
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+body {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-template-rows: repeat(8, [col-start] 1fr);
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/736x/2e/70/1f/2e701ff7b888245d5e059cafac5a0005--bee-art-bee-keeping.jpg') no-repeat center center fixed;
   background-size: cover;
+
 }
 
-img {
-  filter: grayscale(100%);
-}
+main {
+  grid-column: col-start 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  background:rgba(0, 0, 0, 0.6);
+  height: 100%;
+} 
 
-p, h1, h2, a {
-  text-align: center;
-  font-family: 'Merriweather', serif;
-  color: white;
-  transition: linear .2s;
+fieldset {
+  border: none;
 }
 
 h1 {
-  font-size: 3.5vw;
+  text-align: center;
+  font-size: 50px;
   font-family: 'Raleway', serif;
   color: rgb(248, 239, 174);
 }
 
 h2 {
-  font-size: 2vw;
+  text-align: center;
+  font-size: 35px;
   font-family: 'Raleway', serif;
   color: rgb(248, 239, 174);
 }
 
-.subheading {
-  margin-bottom: 2em;
+p, a {
+  font-family: 'Merriweather', serif;
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-size: 28px;
 }
 
 a, label {
@@ -44,9 +61,19 @@ a, label {
   transition: linear .2s;
 }
 
-a:hover, label:hover {
-  color: rgba(169, 169, 169, .6);
-  transition: linear .2s;
+label {
+  padding: 0 50px;
+  cursor: pointer;
+  color: white;
+}
+
+label input {
+  opacity: 0; 
+  display:block;
+  height:0;
+  width:0;
+  position:absolute;
+  overflow:hidden;
 }
 
 ul {
@@ -56,52 +83,32 @@ ul {
 }
 
 li {
-  color: rgb(218, 204, 102);
+  color: rgb(248, 239, 174);
+}
+
+img {
+  filter: grayscale(100%);
 }
 
 button {
   font-family: 'Raleway', serif;
-  font-weight: 900;
-  font-size: 1.5vw;
+  font-weight: 700;
+  font-size: 22px;
   cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  transition: linear .2s;
+  width: 150px;
+  height: 50px;
 }
 
-.buttons, .git-buttons, .youtube-buttons {
-  text-align: center; 
-}
-
-html {
-}
-
-body { 
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-}
-
-.main-container {
-  display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-template-rows: repeat(12, [col-start] 1fr);
-  height: 100vh;
-}
-
-main {
-  grid-column: col-start / span 12;
-  display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-} 
-
-.pub-api-div, .git-div {
-  text-align: center;
-  /* background: rgba(184, 134, 11, 0.8); */
-  background: rgba(0, 0, 0, 0.6);
+label {
+  font-size: 22px;
 }
 
 .title-content {
-  grid-column: col-start / span 12;
+  grid-column: col-start / span 24;
   grid-row-start: span 1;
-  /* background: rgba(184, 134, 11, 0.8); */
   background: rgba(10,48,85,0.95);
 }
 
@@ -111,40 +118,73 @@ main {
   background: rgba(0, 0, 0, 0.6);
 }
 
+.input-div {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-template-rows: 1;
+  margin: 0 auto;
+  margin-top: 1em;
+  width: 90%;
+}
+
 .checkboxes-div {
   grid-column: 1fr;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-top: 1em;
+  margin-bottom: 80px;
 }
 
-/* checkbox styling */
-
-label {
-  /* font-size: 1.8vw; */
-  cursor: pointer;
-  color: white;
+.pub-api-div, .git-div {
+  text-align: center;
 }
 
-label input {
-  visibility: hidden;/* <-- hide the default checkbox, the rest is to hide and alllow tabbing, which display:none prevents */
-  display:block;
-  height:0;
-  width:0;
-  position:absolute;
-  overflow:hidden;
+.search-filter-span-positioner {
+  position: relative;
+  text-align: center;
+  bottom: 8px;
 }
 
-/* [type=checkbox]:checked + span {/* <-- style its checked state */
-  /* background: white;
-  transition: linear .2s;
-} */
+.search-filter-span {
+  display: inline;
+  position: absolute;
+  top: 100px;
+}
+
+.you-git-label .search-filter-span:last-of-type {
+  left: -38px;
+}
+
+.category-label .search-filter-span:last-of-type {
+  left: -5px;
+}
+
+.li-divider {
+  display: none;
+}
+
+.buttons, .git-buttons, .youtube-buttons {
+  text-align: center; 
+}
 
 .pub-api-div {
   grid-column: col-start / span 6;
   grid-row-start: span 1;
+}
+
+.pub-api-result-li, .git-result-li {
+  font-size: 24px;
+  margin-bottom: 8px;
+  padding-right: 5px;
+}
+
+.public-api-search-results {
+  margin-bottom: 100px;
+}
+
+.no-results-message-container {
+  padding: 0 7px;
 }
 
 .git-div {
@@ -155,61 +195,27 @@ label input {
 .youtube-div {
 grid-column: col-start / span 12;
 grid-row-start: span 3;
-background: rgba(0, 0, 0, 0.6);
 } 
-
-.input-div {
-  display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-template-rows: 1;
-  margin-top: 1em;
-}
-
-#search-input {
-  grid-column: col-start 4 / span 6;
-  grid-row: 1;
-  height: 60px;
-  font-size: 30px;
-  border: none;
-  border-radius: 4px;
-  background: rgba(103, 105, 109, .6);
-  transition: linear .2s;
-  line-height: 30px;
-  padding-left: 70px;
-  color: black;
-}
-
-#search-input:focus, #search-button:focus {
-  outline: 0;
-}
-
-#search-button {
-  grid-column: col-start 4 / span 6;
-  grid-row: 1;
-  height: 4.5vh;
-  border: none;
-  background: none;
-  color: white;
-  transition: linear .2s;
-  width: 45px;
-}
-
-#search-button i {
-  float: left;
-  font-size: 60px;
-  font-weight: 300;
-}
 
 .youtube-api-search-results {
   width: 100%;
-  display: table;
   margin: 0;
   padding: 0;
   font-size: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.youtube-li {
-  display: table-cell;
+.youtube-result-text {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.youtube-result-li {
+  display: inline-block;
+  width: calc(100% / 5)
 }
 
 .youtube-thumbnail-container {
@@ -223,73 +229,241 @@ background: rgba(0, 0, 0, 0.6);
 }
 
 .youtube-thumbnail-title {
-  font-size: .8vw;
-  width: 18vw;
+  font-size: 1.2vw;
+  width: 19vw;
   position: absolute;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  top: -14%;
+  top: -18%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0; 
 } 
 
+#subheading {
+  margin-bottom: 2em;
+  padding: 0 .5em;
+}
+
+#search-input {
+  grid-column: col-start 3 / span 8;
+  grid-row: 1;
+  height: 60px;
+  font-size: 30px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(103, 105, 109, .6);
+  transition: linear .2s;
+  line-height: 30px;
+  padding-left: 70px;
+  color: black;
+}
+
+#search-button {
+  grid-column: col-start 3 / span 8;
+  grid-row: 1;
+  border: none;
+  background: none;
+  color: white;
+  transition: linear .2s;
+  width: 60px;
+  height: 100%;
+}
+
+#search-button i {
+  float: left;
+  font-size: 60px;
+  font-weight: 300;
+}
+
+img:hover {
+  filter: none;
+}
+
+a:hover, label:hover {
+  color: rgba(169, 169, 169, .6);
+  transition: linear .2s;
+}
+
+button:hover {
+  color: white;
+  background: rgba(169, 169, 169, .6);
+  transition: linear .2s;
+}
+
 @media only screen and (max-width: 1024px) {
-
-  .youtube-div {
-    margin: 0 auto;
+  button {
+    width: 200px;
+    height: 50px;
+    font-size: 28px;
   }
-
-  .main-container {
-    display: grid;
-    grid-template-columns: repeat(12, [col-start] 1fr);
-    height: 100vh;
+  body {
+    width: 100%;
   }
-
   .pub-api-div {
   grid-column: col-start / span 12;
   }
-
-  .public-api-search-results li 
-  {
-    display: inline-block;
+  .public-api-search-results {
+    margin-bottom: 20px;
   }
-
+  .public-api-search-results li, .github-api-search-results li {
+    display: inline-block;
+    padding: 0 9px;
+  }
+  .li-divider {
+  display: inline;
+  }
   .git-div {
     grid-column: col-start / span 12;
   }
-
-  .github-api-search-results li {
-    display: inline-block;
+  .youtube-div {
+  margin: 0 auto;
   }
-
+  .youtube-result-text {
+    margin-bottom: 20px;
+  }
   .youtube-api-search-results {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: 0;
-  text-align: center;
-  }
-
-  .youtube-li {
-    display: inline-block;
-    margin: 0;
-  }
-
-  .youtube-thumbnail {
-    padding: 1.9vh 1.2vw;
     width: 100%;
-    height: auto;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .youtube-result-li {
+    display: inline-block;
+    width: calc(100% / 3);
+    margin: 0;
+    padding-top: 25px;
+  }
+  .youtube-thumbnail {
+    padding: 5px;
     margin: 0;
   }
-
   .youtube-thumbnail-title {
     font-size: 1.5vw;
-    top: -3%;
-    width: 22vw;
+    width: 31vw;
+    top: -11.5%;
+  }
+  #search-input {
+      grid-column: col-start 1 / span 12;
+    }
+  #search-button {
+    grid-column: col-start 1 / span 12;
+  }
+  a:hover, label:hover {
+  color: white;
   }
 
+  button:hover {
+    color: black;
+    background: white;
+  }  
 }
 
+@media only screen and (max-width: 700px) {
+  button {
+  color: black;
+  background: white;
+  text-align: center;
+  font-size: 16px;
+  }
+  body {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.pinimg.com/736x/2e/70/1f/2e701ff7b888245d5e059cafac5a0005--bee-art-bee-keeping.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+  label {
+    padding: 0 25px;
+    font-size: 20px;
+  }
+  .subheading {
+    font-size: 26px;
+  }
+  .search-filter-span-positioner {
+    left: 4px;
+  }
+  .js-search-form, .js-search-results {
+    background: none;
+  }
+  .youtube-result-li {
+    width: calc(100% / 2);
+  }
+  .youtube-thumbnail-title {
+    font-size: 2.5vw;
+    width: 46vw;
+    top: -12.5%;
+  }
+  .youtube-label .search-filter-span:last-of-type {
+    right: -65px;
+  }
+  #subheading {
+    margin-top: -15px;
+  }
+  #search-button {
+    font-size: 10px;
+    height: 100%;
+    margin-right: 5px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  label {
+    padding: 0 29px;
+    font-size: 16px;
+  }
+  .subheading {
+  font-size: 20px;
+  margin-top: -20px;
+  }
+  .checkboxes-div {
+    margin-bottom: 40px;
+  }
+  .search-filter-span-positioner {
+    top: -50px;
+    left: -15px;
+  }
+  .github-label .search-filter-span:last-of-type {
+      right: -65px;
+  }
+  .you-git-label .search-filter-span:last-of-type {
+      left: -20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  a {
+    font-size: 25px;
+  }
+  label {
+      padding: 0 19px;
+      font-size: 12px;
+    }
+  button {
+    width: 150px;
+  }
+  .youtube-result-li {
+  width: 100%;
+  padding-bottom: 10px;
+  }
+  .youtube-thumbnail-title {
+  font-size: 4.3vw;
+  width: 90vw;
+  margin-top: 10px;
+  }
+  .category-label .search-filter-span:last-of-type {
+    left: 6px;
+  }
+  .you-git-label .search-filter-span:last-of-type {
+      left: -12px;
+  }
+}
+
+@-moz-document url-prefix(){ 
+  .search-filter-span {
+    top: 110px;
+  }
+}

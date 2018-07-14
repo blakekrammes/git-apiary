@@ -1,25 +1,24 @@
-
 /* initial state */
 .hex {
-    margin-top: 11.6px;
-    width: 34.7px;
-    height: 20px;
+    margin-top: 22.12px;
+    width: 69.4px;
+    height: 40px;
     background: black;
     position: relative;
 }
 .hex:before, .hex:after {
     content:"";
-    border-left: 17.3px solid transparent;
-    border-right: 17.3px solid transparent;
+    border-left: 34.6px solid transparent;
+    border-right: 34.6px solid transparent;
     position: absolute;
 }
 .hex:before {
-    top: -9.8px;
-    border-bottom: 10px solid black;
+    top: -19.6px;
+    border-bottom: 20px solid black;
 }
 .hex:after {
-    bottom: -9.8px;
-    border-top: 10px solid black;
+    bottom: -19.6px;
+    border-top: 20px solid black;
 }
 .hex.inner2 {
   background:rgba(100, 100, 100, 0.5);
@@ -28,11 +27,11 @@
     transition: linear .2s;
 }
 .hex.inner2:before {
-    border-bottom: 9.7px solid rgba(100, 100, 100, 0.5);
+    border-bottom: 19.9px solid rgba(100, 100, 100, 0.5);
     transition: linear .2s;
 }
 .hex.inner2:after {
-    border-top: 9.9px solid rgba(100, 100, 100, 0.5);
+    border-top: 19.8px solid rgba(100, 100, 100, 0.5);
     transition: linear .2s;
 } 
 
@@ -44,11 +43,11 @@
     transition: linear .2s;
 }
 .hex.inner2.hovering:before {
-    border-bottom: 9.7px solid rgba(99, 96, 96, .4);
+    border-bottom: 19.9px solid rgba(99, 96, 96, .4);
     transition: linear .2s;
 }
 .hex.inner2.hovering:after {
-    border-top: 9.9px solid rgba(99, 96, 96, .4);
+    border-top: 19.8px solid rgba(99, 96, 96, .4);
     transition: linear .2s;
 }
 
@@ -61,11 +60,112 @@
     transition: linear .2s;
 }
 .hex.inner2.whiten:before {
-    border-bottom: 9.7px solid white;
+    border-bottom: 19.9px solid white;
     transition: linear .2s;
 }
 .hex.inner2.whiten:after {
-    border-top: 9.9px solid white;
+    border-top: 19.8px solid white;
     transition: linear .2s;
 } 
 
+@media only screen and (max-width: 550px) {
+
+  /* initial state */
+  .hex {
+      margin-top: 11px;
+      width: 35px;
+      height: 20px;
+      background: black;
+      position: relative;
+  }
+  .hex:before, .hex:after {
+      content:"";
+      border-left: 17px solid transparent;
+      border-right: 17px solid transparent;
+      position: absolute;
+  }
+  .hex:before {
+      top: -10px;
+      border-bottom: 10px solid black;
+  }
+  .hex:after {
+      bottom: -10px;
+      border-top: 10px solid black;
+  }
+  .hex.inner2 {
+    background:rgba(100, 100, 100, 0.5);
+      transform: scale(.8, .8);
+      z-index:2;
+      transition: linear .2s;
+  }
+  .hex.inner2:before {
+      border-bottom: 10px solid rgba(100, 100, 100, 0.5);
+      transition: linear .2s;
+  }
+  .hex.inner2:after {
+      border-top: 10px solid rgba(100, 100, 100, 0.5);
+      transition: linear .2s;
+  } 
+
+  /* on hover */
+  .hex.inner2.hovering {
+      background: rgba(99, 96, 96, .4);
+      transform: scale(.8, .8);
+      z-index:2;
+      transition: linear .2s;
+  }
+  .hex.inner2.hovering:before {
+      border-bottom: 10px solid rgba(99, 96, 96, .4);
+      transition: linear .2s;
+  }
+  .hex.inner2.hovering:after {
+      border-top: 10px solid rgba(99, 96, 96, .4);
+      transition: linear .2s;
+  }
+
+  //code to whiten
+  .hex.inner2.whiten {
+    background: white;
+      transform: scale(.8, .8);
+      z-index: 2;
+      transition: linear .2s;
+  }
+  .hex.inner2.whiten:before {
+      border-bottom: 10px solid white;
+      transition: linear .2s;
+  }
+  .hex.inner2.whiten:after {
+      border-top: 10px solid white;
+      transition: linear .2s;
+  } 
+}
+.inner2.whiten {
+  background: white;
+}
+
+@-moz-document url-prefix(){ 
+  .hex.inner2:before {
+      border-bottom: 20px solid rgba(100, 100, 100, 0.5);
+      transition: linear .2s;
+  }
+  .hex.inner2:after {
+      border-top: 20px solid rgba(100, 100, 100, 0.5);
+      transition: linear .2s;
+  } 
+  .hex.inner2.hovering:before {
+      border-bottom: 20px solid rgba(99, 96, 96, .4);
+      transition: linear .2s;
+  }
+  .hex.inner2.hovering:after {
+      border-top: 20px solid rgba(99, 96, 96, .4);
+      transition: linear .2s;
+  }
+  .hex.inner2.whiten:before {
+      border-bottom: 20px solid white;
+      transition: linear .2s;
+  }
+  .hex.inner2.whiten:after {
+      border-top: 20px solid white;
+      transition: linear .2s;
+  } 
+}

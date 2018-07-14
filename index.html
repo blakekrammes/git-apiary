@@ -4,113 +4,103 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Git Apiary</title>
-    <script
-          src="https://code.jquery.com/jquery-3.2.1.min.js"
-          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-          crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link href="index.css" rel="stylesheet" type="text/css" />
     <link href="hexagons.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Raleway:200" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
-    <div class="main-container">
-
-        <div class="title-content">
-        <h1>Git Apiary</h1>
-        <h2 class="subheading">Search by title for secure public APIs, related GitHub repositories and YouTube tutorials</h2>
-        </div>
-
-        <form action="#" class="js-search-form" role="form" autocomplete="off">
-    <div class="input-div">
-      <label for="search-input"></label>
-      <input type="text" id="search-input" name="search-input">
-      <button type="submit" id="search-button">
-      <i class="material-icons">search</i>
-      </button>
-    </div>
-
-    <div class="checkboxes-div">
-
-      <label class="category-label" for="category-box">Public APIs by Category
-      <input type="checkbox" id="category-box" name="title-box"/>
-      <div class="hex">
-        <div class="hex inner">
-          <div class="hex inner2"></div>
-        </div>
-      </div>
-      </label>
-
-      <label class="github-label" for="github-box">Only GitHub
-      <input type="checkbox" id="github-box" name="github-box"/>
-      <div class="hex">
-        <div class="hex inner">
-          <div class="hex inner2"></div>
-        </div>
-      </div>
-      </label>
-
-      <label class="youtube-label" for="youtube-box">Only YouTube
-      <input type="checkbox" id="youtube-box" name="youtube-box"/>
-      <div class="hex">
-        <div class="hex inner">
-          <div class="hex inner2"></div>
-        </div>
-      </div>
-      </label>
-
-      <label class="you-git-label"for="you-git-box">Only GitHub & YouTube
-      <input type="checkbox" id="you-git-box" name="you-git-box"/>
-      <div class="hex">
-        <div class="hex inner">
-          <div class="hex inner2"></div>
-        </div>
-      </div>
-      </label>
-
-    </div>
-  </form>
-
-          <main role="main" class="js-search-results" aria-live="assertive" hidden>
-
-            <div class="pub-api-div" region="public-api-results">
-              <h2 class="result-text"></h2>
-              <ul class="public-api-search-results">
-              </ul>
-              <div class="message-appender"></div>
-              <div class="buttons">
-              <button class="prev-token" hidden>Previous</button>
-              <button class="next-token" hidden>Next</button>
-              <p class="pagination"></p>
-              </div>
+    <header class="title-content" role="banner">
+      <h1>Git Apiary</h1>
+      <h2 id="subheading">Search by title for secure public APIs, related GitHub repositories and YouTube tutorials</h2>
+    </header>
+    <form action="#" class="js-search-form" role="form" autocomplete="off">
+    <fieldset name="search-filters">
+      <section class="input-div" name="search-input-container" role="region">
+        <input aria-label="search-input" type="text" id="search-input" name="search-input">
+        <button type="submit" id="search-button">
+          <i class="material-icons">search</i>
+        </button>
+      </section>
+      <section class="checkboxes-div" name="checkbox-container" role="region">
+        <label class="category-label" for="category-box"><span class="search-filter-span-positioner"><span class="search-filter-span">APIs by Category</span></span>
+          <input type="checkbox" id="category-box" name="title-box"/>
+          <div class="hex">
+            <div class="hex inner">
+              <div class="hex inner2"></div>
             </div>
-
-            <div class="git-div" region="github-api-results">
-              <h2 class="git-result-text"></h2>
-              <ul class="github-api-search-results">
-              </ul>
-              <h2 class="githubSearchLink"></h2>
-              <div class="git-buttons">
-              <button class="prev-git-token" hidden>Previous</button>
-              <button class="next-git-token" hidden>Next</button>
-              </div>
-              <p class="git-pagination"></p>
+          </div>
+        </label>
+        <label class="github-label" for="github-box"><span class="search-filter-span-positioner"><span class="search-filter-span">Only GitHub</span></span>
+          <input type="checkbox" id="github-box" name="github-box"/>
+          <div class="hex">
+            <div class="hex inner">
+              <div class="hex inner2"></div>
             </div>
-
-            <div class="youtube-div" region="github-api-results">
-              <h2 class="youtube-result-text"></h2>
-              <ul class="youtube-api-search-results">
-              </ul>
-              <h2 class="youtubeSearchLink"></h2>
-              <div class="youtube-buttons">
-              <button class="prev-youtube-token" hidden>Previous</button>
-              <button class="next-youtube-token" hidden>Next</button>
-              </div>
-              <p class="youtube-pagination"></p>
+          </div>
+        </label>
+        <label class="youtube-label" for="youtube-box"><span class="search-filter-span-positioner"><span class="search-filter-span">Only YouTube</span></span>
+          <input type="checkbox" id="youtube-box" name="youtube-box"/>
+          <div class="hex">
+            <div class="hex inner">
+              <div class="hex inner2"></div>
+          </div>
+        </div>
+        </label>
+        <label class="you-git-label"for="you-git-box"><span class="search-filter-span-positioner"><span class="search-filter-span">Only GitHub+YouTube </span></span>
+          <input type="checkbox" id="you-git-box" name="you-git-box"/>
+          <div class="hex">
+            <div class="hex inner">
+              <div class="hex inner2"></div>
             </div>
-          </main>
-      </div>
+          </div>
+        </label>
+      </section>
+    </fieldset>
+    </form>
+    <main role="main" class="js-search-results" aria-live="assertive" aria-atomic="true" hidden>
+      <section class="pub-api-div" name="public-api-search-results-container" role="region" region="public-api-results">
+        <header>
+          <h2 class="result-text" hidden aria-live="polite"></h2>
+        </header>
+        <ul class="public-api-search-results" hidden aria-live="polite">
+        </ul>
+        <div class="no-results-message-container" hidden></div>
+        <div class="buttons">
+          <button class="prev-token" hidden>Previous</button>
+          <button class="next-token" hidden>Next</button>
+        </div>
+        <p class="pagination" hidden></p>
+      </section>
+      <section class="git-div" name="github-api-search-results-container" role="region" region="github-api-results" aria-live="polite">
+        <header>
+          <h2 class="git-result-text" hidden></h2>
+        </header>
+        <ul class="github-api-search-results" hidden>
+        </ul>
+        <h2 class="githubSearchLink" hidden></h2>
+        <div class="git-buttons" >
+          <button class="prev-git-token" hidden>Previous</button>
+          <button class="next-git-token" hidden>Next</button>
+        </div>
+        <p class="git-pagination" hidden></p>
+      </section>
+      <section class="youtube-div" ame="youtube-api-search-results-container" role="region" region="youtube-api-results" aria-live="polite">
+        <header>
+          <h2 class="youtube-result-text" hidden></h2>
+        </header>
+        <ul class="youtube-api-search-results" hidden>
+        </ul>
+        <h2 class="youtubeSearchLink" hidden></h2>
+        <div class="youtube-buttons">
+          <button class="prev-youtube-token" hidden>Previous</button>
+          <button class="next-youtube-token" hidden>Next</button>
+        </div>
+        <p class="youtube-pagination" hidden></p>
+      </section>
+    </main>
     <script src="index.js"></script>
+    <script src="stylings.js"></script>
   </body>
 </html>
