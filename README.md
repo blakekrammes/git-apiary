@@ -7,11 +7,11 @@
 
 **Initial View:** ![initial-view](https://github.com/Blakesters/git-apiary/blob/master/screenshots/initial-view.png)
 
+**Triple API Search [Default] (Public API Database, GitHub, YouTube):** ![triple-api-search](https://github.com/Blakesters/git-apiary/blob/master/screenshots/triple-api-search.png)
+
 **Single API Search (Public API Database):** ![single-api-search](https://github.com/Blakesters/git-apiary/blob/master/screenshots/single-api-search.png)
 
 **Double API Search (GitHub and YouTube):** ![double-api-search](https://github.com/Blakesters/git-apiary/blob/master/screenshots/double-api-search.png)
-
-**Triple API Search [Default] (Public API Database, GitHub, YouTube):** ![triple-api-search](https://github.com/Blakesters/git-apiary/blob/master/screenshots/triple-api-search.png)
 
 **Summary:**
 The user can search simultaneously through APIs in the 
