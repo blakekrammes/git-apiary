@@ -7,7 +7,9 @@ function getDataFromApiByCategory(searchTerm, callback) {
     category: searchTerm,
     https: true
   };
-  $.getJSON(PUBAPISEARCH_URL, query, callback);
+  $.getJSON(PUBAPISEARCH_URL, query, callback).fail(errorMessage => {
+    alert('There was a problem with your public API search by category.');
+  })
 }
 
 function getDataFromApiByTitle(searchTerm, callback) {
@@ -15,17 +17,19 @@ function getDataFromApiByTitle(searchTerm, callback) {
     title: searchTerm,
     https: true
   };
-  $.getJSON(PUBAPISEARCH_URL, query, callback);
+  $.getJSON(PUBAPISEARCH_URL, query, callback).fail(errorMessage => {
+    alert('There was a problem with your public API search by title.');
+  })
 }
 
 //a function to create the result <li>
 function createLI(result) {
   const resultLI = (`
-  <li class="pub-api-result-li"><a class="appender" href="${result.Link}">${result.API}</a><span class="li-divider"> |</span></li>`);
+  <li class="pub-api-result-li"><a class="appender" href="${result.Link}" target="_blank">${result.API}</a><span class="li-divider"> |</span></li>`);
   return resultLI;
 }
 
-// displays the results of the API query as HTML
+// displays the results of the public API search
 function displayResults(data) {
   $('main').prop('hidden', false);
   $('.pagination').prop('hidden', true);
@@ -48,30 +52,7 @@ function displayResults(data) {
       $('.next-token, .pagination').prop('hidden', false);
       $('.pagination').html(`Page ${pageCount} of ${totalPages}`);
       $('.message-appender').prop('hidden', true);
-      // event-listener for the next button
-      $('.next-token').click(function(event) {
-      firstIndex = addFirstIndex(firstIndex);
-      secondIndex = addSecondIndex(secondIndex);
-      pageCount = addPageCount(pageCount);
-      $('.public-api-search-results').html(APIResults.slice(firstIndex, secondIndex));
-      $('.pagination').html(`Page ${pageCount} of ${totalPages}`);
-      if (pageCount !== totalPages || pageCount == 1) { $('.next-token').prop('hidden', false);}
-      if (pageCount == totalPages) { $('.next-token').prop('hidden', true); $('.prev-token').prop('hidden', false);}
-      else if (pageCount !== 1) { $('.prev-token').prop('hidden', false); }
-      else if (pageCount == 1) { $('.prev-token').prop('hidden', true); }
-      })
-      // event-listener for the prev button
-      $('.prev-token').click(function(event) {
-      firstIndex = subFirstIndex(firstIndex); 
-      secondIndex = subSecondIndex(secondIndex);
-      pageCount = subPageCount(pageCount);
-      $('.public-api-search-results').html(APIResults.slice(firstIndex, secondIndex));
-      $('.pagination').html(`Page ${pageCount} of ${totalPages}`);
-      if (pageCount !== totalPages || pageCount == 1) { $('.next-token').prop('hidden', false); }
-      if (pageCount == totalPages) { $('.next-token').prop('hidden', true); }
-      else if (pageCount !== 1) { $('.prev-token').prop('hidden', false); }
-      else if (pageCount == 1) { $('.prev-token').prop('hidden', true); }
-      })
+      listenForPageTokenClicks(APIResults, totalPages, firstIndex, secondIndex, pageCount);
     }
     else if (totalPages == 1) {
       $('.no-results-message-container').prop('hidden', true);
@@ -81,9 +62,37 @@ function displayResults(data) {
   else {
     $('.no-results-message').css('display', 'block');
     $('.no-results-message-container').prop('hidden', false);
-    $('.no-results-message-container').html(`<p class="no-results-message">No Public API Results. If Searching by Category, Try 'Food', 'Shopping', etc. For Full List of Categories, Go <a href="https://api.publicapis.org/entries?category=animals&https=true">Here</a></p>`);
+    $('.no-results-message-container').html(`<p class="no-results-message">No Public API Results. If Searching by Category, Try 'Food', 'Shopping', etc. For Full List of Categories, Go <a href="https://api.publicapis.org/categories" target="_blank">Here</a></p>`);
     $('.result-text, .public-api-search-results, .next-token, .pagination').prop('hidden', true);
   }
+}
+
+// listens for page token clicks to cycle back and forth through public api results
+function listenForPageTokenClicks(searchResults, pageTotal, index1, index2, currentPage) {
+  // cycle forward on next-token click
+  $('.next-token').click(function(event) {
+    index1 = addFirstIndex(index1);
+    index2 = addSecondIndex(index2);
+    currentPage = addPageCount(currentPage);
+    $('.public-api-search-results').html(searchResults.slice(index1, index2));
+    $('.pagination').html(`Page ${currentPage} of ${pageTotal}`);
+    if (currentPage !== pageTotal || currentPage == 1) { $('.next-token').prop('hidden', false);}
+    if (currentPage == pageTotal) { $('.next-token').prop('hidden', true); $('.prev-token').prop('hidden', false);}
+    else if (currentPage !== 1) { $('.prev-token').prop('hidden', false); }
+    else if (currentPage == 1) { $('.prev-token').prop('hidden', true); }
+  })
+  // cycle backwards on prev-token click
+  $('.prev-token').click(function(event) {
+    index1 = subFirstIndex(index1); 
+    index2 = subSecondIndex(index2);
+    currentPage = subPageCount(currentPage);
+    $('.public-api-search-results').html(searchResults.slice(index1, index2));
+    $('.pagination').html(`Page ${currentPage} of ${pageTotal}`);
+    if (currentPage !== pageTotal || currentPage == 1) { $('.next-token').prop('hidden', false); }
+    if (currentPage == pageTotal) { $('.next-token').prop('hidden', true); }
+    else if (currentPage !== 1) { $('.prev-token').prop('hidden', false); }
+    else if (currentPage == 1) { $('.prev-token').prop('hidden', true); }
+  })
 }
 
 // functions to increment pagination and result display variables
@@ -116,7 +125,9 @@ function getDataFromGithubApi(gitTerm, gitCallback) {
     q: `${gitTerm} api`,
     per_page: 50
   }
-  $.getJSON(GITHUB_SEARCH_URL, gitQuery, gitCallback);
+  $.getJSON(GITHUB_SEARCH_URL, gitQuery, gitCallback).fail(errorMessage => {
+    alert('There was a problem with your GitHub search.');
+  })
   if ($('#github-box').is(':checked') || $('#category-box').is(':checked')) {
   }
   else {
@@ -127,11 +138,13 @@ function getDataFromGithubApi(gitTerm, gitCallback) {
 //a function to create the result <li> for git search
 function createGitLI(gitResult) {
   const gitResultLI = (`
-  <li class="git-result-li"><a href="${gitResult.html_url}">${gitResult.name}</a> by <a href="${gitResult.owner.html_url}">${gitResult.owner.login}</a><span class="li-divider">   |</span></li>`);
+  <li class="git-result-li"><a href="${gitResult.html_url}" target="_blank">${gitResult.name}</a> by <a href="${gitResult.owner.html_url}" target="_blank">${gitResult.owner.login}</a><span class="li-divider">   |</span></li>`);
   return gitResultLI;
 }
 
+// displays the results of the github API search
 function displayGitResults(gitData) {
+  $('main').prop('hidden', false);
   $('.git-pagination').prop('hidden', true);
   let firstGitIndex = 0; // first of 5 array items
   let secondGitIndex = 5; // last of 5 array items
@@ -146,33 +159,9 @@ function displayGitResults(gitData) {
       firstGitIndex = 0;
       secondGitIndex = 5;
       gitPageCount = 1;
-
-      $('.next-git-token, .git-pagination').prop('hidden', false);
+      $('.next-git-token, .git-pagination, .githubSearchLink').prop('hidden', false);
       $('.git-pagination').html(`Page ${gitPageCount} of ${totalGitPages}`);
-      // event-listener for the next button
-      $('.next-git-token').click(function(event) {
-      firstGitIndex = addFirstIndex(firstGitIndex);
-      secondGitIndex = addSecondIndex(secondGitIndex);
-      gitPageCount = addPageCount(gitPageCount);
-      $('.github-api-search-results').html(gitAPIResults.slice(firstGitIndex, secondGitIndex));
-      $('.git-pagination').html(`Page ${gitPageCount} of ${totalGitPages}`);
-      if (gitPageCount !== totalGitPages || gitPageCount == 1) { $('.next-git-token').prop('hidden', false);}
-      if (gitPageCount == totalGitPages) { $('.next-git-token').prop('hidden', true); }
-      else if (gitPageCount !== 1) { $('.prev-git-token').prop('hidden', false); }
-      else if (gitPageCount == 1) { $('.prev-git-token').prop('hidden', true); }
-      })
-      // event-listener for the prev button
-      $('.prev-git-token').click(function(event) {
-      firstGitIndex = subFirstIndex(firstGitIndex); 
-      secondGitIndex = subSecondIndex(secondGitIndex);
-      gitPageCount = subPageCount(gitPageCount);
-      $('.github-api-search-results').html(gitAPIResults.slice(firstGitIndex, secondGitIndex));
-      $('.git-pagination').html(`Page ${gitPageCount} of ${totalGitPages}`);
-      if (gitPageCount !== totalGitPages || gitPageCount == 1) { $('.next-git-token').prop('hidden', false); }
-      if (gitPageCount == totalGitPages) { $('.next-git-token').prop('hidden', true); }
-      else if (gitPageCount !== 1) { $('.prev-git-token').prop('hidden', false); }
-      else if (gitPageCount == 1) { $('.prev-git-token').prop('hidden', true); }
-      })
+      listenForGithubPageTokenClicks(gitAPIResults, totalGitPages, firstGitIndex, secondGitIndex, gitPageCount);
     }
     else if (totalGitPages == 1) {
       $('.next-git-token, .prev-git-token, .git-pagination').prop('hidden', true);
@@ -182,6 +171,34 @@ function displayGitResults(gitData) {
 // creates a link to the search results on github
 function createGithubSearchLink(searchTerm) {
 return `https://github.com/search?q=${searchTerm}+api`;
+}
+
+// listens for page token clicks to cycle back and forth through github api results
+function listenForGithubPageTokenClicks(searchResults, pageTotal, index1, index2, currentPage) {
+  // cycle forward on next-token click
+  $('.next-git-token').click(function(event) {
+    index1 = addFirstIndex(index1);
+    index2 = addSecondIndex(index2);
+    currentPage = addPageCount(currentPage);
+    $('.github-api-search-results').html(searchResults.slice(index1, index2));
+    $('.git-pagination').html(`Page ${currentPage} of ${pageTotal}`);
+    if (currentPage !== pageTotal || currentPage == 1) { $('.next-git-token').prop('hidden', false);}
+    if (currentPage == pageTotal) { $('.next-git-token').prop('hidden', true); }
+    else if (currentPage !== 1) { $('.prev-git-token').prop('hidden', false); }
+    else if (currentPage == 1) { $('.prev-git-token').prop('hidden', true); }
+  })
+  // cycle backwards on prev-token click
+  $('.prev-git-token').click(function(event) {
+    index1 = subFirstIndex(index1); 
+    index2 = subSecondIndex(index2);
+    currentPage = subPageCount(currentPage);
+    $('.github-api-search-results').html(searchResults.slice(index1, index2));
+    $('.git-pagination').html(`Page ${currentPage} of ${pageTotal}`);
+    if (currentPage !== pageTotal || currentPage == 1) { $('.next-git-token').prop('hidden', false); }
+    if (currentPage == pageTotal) { $('.next-git-token').prop('hidden', true); }
+    else if (currentPage !== 1) { $('.prev-git-token').prop('hidden', false); }
+    else if (currentPage == 1) { $('.prev-git-token').prop('hidden', true); }
+  })
 }
 
 // code for youtube search–––––––––––––––––––––––––––––
@@ -198,18 +215,22 @@ function getDataFromYoutubeApi(youtubeTerm, youtubeCallback) {
     key: 'AIzaSyAiGRsOIEbFoHzFwI69mwce6ujYAnsNtig'
   }
   setTimeout(function() {
-  $.getJSON(YOUTUBE_SEARCH_URL, youtubeQuery, youtubeCallback);
-}, 600);
+  $.getJSON(YOUTUBE_SEARCH_URL, youtubeQuery, youtubeCallback).fail(errorMessage => {
+    alert('There was a problem with your YouTube search.');
+  })
+  }, 600);
 }
 
-//a function to create the result <li> for youtube search
+//creates individual result <li> for each youtube search result
 function createYoutubeLI(youtubeResult) {
   const youtubeResultLI = (`
-  <li class="youtube-result-li"><a class="youtube-link" href="${YOUTUBE_VIDEO_URL}${youtubeResult.id.videoId}"><div class="youtube-thumbnail-container"><img src="${youtubeResult.snippet.thumbnails.medium.url}" alt="videoImage" class="youtube-thumbnail"><div class="youtube-thumbnail-title">${youtubeResult.snippet.title}</div></div></a></li>`);
+  <li class="youtube-result-li"><a class="youtube-link" href="${YOUTUBE_VIDEO_URL}${youtubeResult.id.videoId}" target="_blank"><div class="youtube-thumbnail-container"><img src="${youtubeResult.snippet.thumbnails.medium.url}" alt="videoImage" class="youtube-thumbnail"><div class="youtube-thumbnail-title">${youtubeResult.snippet.title}</div></div></a></li>`);
   return youtubeResultLI;
 }
 
+// displays the results of the youtube api search
 function displayYoutubeResults(youtubeData) {
+  $('main').prop('hidden', false);
   $('.youtube-pagination').prop('hidden', true);
   let firstYoutubeIndex = 0; // first of 5 array items
   let secondYoutubeIndex = 5; // last of 5 array items
@@ -224,45 +245,50 @@ function displayYoutubeResults(youtubeData) {
       firstYoutubeIndex = 0;
       secondYoutubeIndex = 5;
       youtubePageCount = 1;
-      $('.next-youtube-token, .youtube-pagination').prop('hidden', false);
+      $('.next-youtube-token, .youtube-pagination, .youtubeSearchLink').prop('hidden', false);
       $('.youtube-pagination').html(`Page ${youtubePageCount} of ${totalYoutubePages}`);
-      // event-listener for the next button
-      $('.next-youtube-token').click(function(event) {
-      firstYoutubeIndex = addFirstIndex(firstYoutubeIndex);
-      secondYoutubeIndex = addSecondIndex(secondYoutubeIndex);
-      youtubePageCount = addPageCount(youtubePageCount);
-      $('.youtube-api-search-results').html(youtubeAPIResults.slice(firstYoutubeIndex, secondYoutubeIndex));
-      $('.youtube-pagination').html(`Page ${youtubePageCount} of ${totalYoutubePages}`);
-      if (youtubePageCount !== totalYoutubePages || youtubePageCount == 1) { $('.next-youtube-token').prop('hidden', false);}
-      if (youtubePageCount == totalYoutubePages) { $('.next-youtube-token').prop('hidden', true); }
-      else if (youtubePageCount !== 1) { $('.prev-youtube-token').prop('hidden', false); }
-      else if (youtubePageCount == 1) { $('.prev-youtube-token').prop('hidden', true); }
-      })
-      // event-listener for the prev button
-      $('.prev-youtube-token').click(function(event) {
-      firstYoutubeIndex = subFirstIndex(firstYoutubeIndex);
-      secondYoutubeIndex = subSecondIndex(secondYoutubeIndex);
-      youtubePageCount = subPageCount(youtubePageCount);
-      $('.youtube-api-search-results').html(youtubeAPIResults.slice(firstYoutubeIndex, secondYoutubeIndex));
-      $('.youtube-pagination').html(`Page ${youtubePageCount} of ${totalYoutubePages}`);
-      if (youtubePageCount !== totalYoutubePages || youtubePageCount == 1) { $('.next-youtube-token').prop('hidden', false); }
-      if (youtubePageCount == totalYoutubePages) { $('.next-youtube-token').prop('hidden', true); }
-      else if (youtubePageCount !== 1) { $('.prev-youtube-token').prop('hidden', false); }
-      else if (youtubePageCount == 1) { $('.prev-youtube-token').prop('hidden', true); }
-      })
+      listenForYoutubePageTokenClicks(youtubeAPIResults, totalYoutubePages, firstYoutubeIndex, secondYoutubeIndex, youtubePageCount);
     }
     else if (totalYoutubePages == 1) {
-      $('.next-youtube-token, .prev-youtube-token, .youtube-pagination').prop('hidden', true);
+      $('.next-youtube-token, .prev-youtube-token, .youtube-pagination, .youtubeSearchLink').prop('hidden', true);
     } 
 }
 
 // creates a link to the search results on youtube
-function createYoutubeSearchLink(ST) { 
-return `https://www.youtube.com/results?search_query=${ST}+api`;
+function createYoutubeSearchLink(searchTerm) { 
+return `https://www.youtube.com/results?search_query=${searchTerm}+api`;
+}
+
+// listens for page token clicks to cycle back and forth through youtube api results
+function listenForYoutubePageTokenClicks(searchResults, pageTotal, index1, index2, currentPage) {
+  // cycle forward on next-token click
+  $('.next-youtube-token').click(function(event) {
+    index1 = addFirstIndex(index1);
+    index2 = addSecondIndex(index2);
+    currentPage = addPageCount(currentPage);
+    $('.youtube-api-search-results').html(searchResults.slice(index1, index2));
+    $('.youtube-pagination').html(`Page ${currentPage} of ${pageTotal}`);
+    if (currentPage !== pageTotal || currentPage == 1) { $('.next-youtube-token').prop('hidden', false);}
+    if (currentPage == pageTotal) { $('.next-youtube-token').prop('hidden', true); }
+    else if (currentPage !== 1) { $('.prev-youtube-token').prop('hidden', false); }
+    else if (currentPage == 1) { $('.prev-youtube-token').prop('hidden', true); }
+  })
+  // cycle backward on prev-token click
+  $('.prev-youtube-token').click(function(event) {
+    index1 = subFirstIndex(index1);
+    index2 = subSecondIndex(index2);
+    currentPage = subPageCount(currentPage);
+    $('.youtube-api-search-results').html(searchResults.slice(index1, index2));
+    $('.youtube-pagination').html(`Page ${currentPage} of ${pageTotal}`);
+    if (currentPage !== pageTotal || currentPage == 1) { $('.next-youtube-token').prop('hidden', false); }
+    if (currentPage == pageTotal) { $('.next-youtube-token').prop('hidden', true); }
+    else if (currentPage !== 1) { $('.prev-youtube-token').prop('hidden', false); }
+    else if (currentPage == 1) { $('.prev-youtube-token').prop('hidden', true); }
+  })
 }
 
 //_____________________________________________________
-// watches for the search form to be submitted and sends the search/query value from the user's input to the getDataFromApi function
+// watches for the search form to be submitted and sends the search/query value from the user's input to the various getDataFromApi functions
 function watchSubmit() {
   // allows only 1 box to be checked at a time
   $('input[type="checkbox"]').on('change', function() {
@@ -280,47 +306,68 @@ function watchSubmit() {
     // reset input val
     searchTarget.val('');
     if ($('#category-box').is(':checked')) {
-      $('.git-div, .youtube-div').css('display', 'none');
-      $('.pub-api-div').css('display', 'block');
-      getDataFromApiByCategory(searchWord, displayResults);
+      triggerSearchByCategory(searchWord);
     }
     else if ($('#github-box').is(':checked')) {
-      $('.pub-api-div, .youtube-div').css('display', 'none');
-      $('.git-div').css('display', 'block');
-      getDataFromGithubApi(searchWord, displayGitResults);
-      setTimeout(function() {
-      $('.githubSearchLink').prop('hidden', false);
-      $('.githubSearchLink').html(`<a href="${githubLink}">Continue on Github</a>`);
-    }, 1450);
+      triggerSearchByGithub(searchWord, githubLink);
     }
     else if ($('#youtube-box').is(':checked')) {
-      $('.pub-api-div, .git-div').css('display', 'none');
-      $('.youtube-div').css('display', 'block');
-      getDataFromYoutubeApi(searchWord, displayYoutubeResults);
-      $('.youtubeSearchLink').html(`<a href="${youtubeLink}">Continue on YouTube</a>`);
+      triggerSearchByYoutube(searchWord, youtubeLink);
     }
     else if ($('#you-git-box').is(':checked')) {
-      $('.pub-api-div').css('display', 'none');
-      $('.youtube-div, .git-div').css('display', 'block');
-      getDataFromGithubApi(searchWord, displayGitResults);
-      setTimeout(function() {
-        $('.githubSearchLink').prop('hidden', false);
-        $('.githubSearchLink').html(`<a href="${githubLink}">Continue on Github</a>`);
-        $('.youtubeSearchLink').prop('hidden', false);
-        $('.youtubeSearchLink').html(`<a href="${youtubeLink}">Continue on YouTube</a>`); }, 1450);
+      triggerSearchByGithubAndYoutube(searchWord, githubLink, youtubeLink);
     }
     else {
-      $('.pub-api-div, .git-div, .youtube-div').css('display', 'block');
-      getDataFromApiByTitle(searchWord, displayResults);
-      getDataFromGithubApi(searchWord, displayGitResults);
-      setTimeout(function() {
-      $('.githubSearchLink').prop('hidden', false);
-      $('.githubSearchLink').html(`<a href="${githubLink}">Continue on Github</a>`);
-      $('.youtubeSearchLink').prop('hidden', false);
-      $('.youtubeSearchLink').html(`<a href="${youtubeLink}">Continue on YouTube</a>`);
-      }, 1450);
+      triggerSearchByAllAPIs(searchWord, githubLink, youtubeLink);
     }
   });
+}
+
+// various functions to filter which API(s) to search
+function triggerSearchByCategory(inputTerm) {
+  $('.git-div, .youtube-div').css('display', 'none');
+  $('.pub-api-div').css('display', 'block');
+  getDataFromApiByCategory(inputTerm, displayResults);
+}
+
+function triggerSearchByGithub(inputTerm, linkToGithub) {
+  $('.pub-api-div, .youtube-div').css('display', 'none');
+  $('.git-div').css('display', 'block');
+  getDataFromGithubApi(inputTerm, displayGitResults);
+  setTimeout(function() {
+    $('.githubSearchLink').prop('hidden', false);
+    $('.githubSearchLink').html(`<a href="${linkToGithub}" target="_blank">Continue on Github</a>`);
+  }, 1450);
+}
+
+function triggerSearchByYoutube(inputTerm, linkToYoutube) {
+  $('.pub-api-div, .git-div').css('display', 'none');
+    $('.youtube-div').css('display', 'block');
+    getDataFromYoutubeApi(inputTerm, displayYoutubeResults);
+    $('.youtubeSearchLink').html(`<a href="${linkToYoutube}" target="_blank">Continue on YouTube</a>`);
+}
+
+function triggerSearchByGithubAndYoutube(inputTerm, linkToGithub, linkToYoutube) {
+  $('.pub-api-div').css('display', 'none');
+  $('.youtube-div, .git-div').css('display', 'block');
+  getDataFromGithubApi(inputTerm, displayGitResults);
+  setTimeout(function() {
+    $('.githubSearchLink').prop('hidden', false);
+    $('.githubSearchLink').html(`<a href="${linkToGithub}" target="_blank">Continue on Github</a>`);
+    $('.youtubeSearchLink').prop('hidden', false);
+    $('.youtubeSearchLink').html(`<a href="${linkToYoutube}" target="_blank">Continue on YouTube</a>`); }, 1450);
+}
+
+function triggerSearchByAllAPIs(inputTerm, linkToGithub, linkToYoutube) {
+  $('.pub-api-div, .git-div, .youtube-div').css('display', 'block');
+    getDataFromApiByTitle(inputTerm, displayResults);
+    getDataFromGithubApi(inputTerm, displayGitResults);
+    setTimeout(function() {
+      $('.githubSearchLink').prop('hidden', false);
+      $('.githubSearchLink').html(`<a href="${linkToGithub}" target="_blank">Continue on Github</a>`);
+      $('.youtubeSearchLink').prop('hidden', false);
+      $('.youtubeSearchLink').html(`<a href="${linkToYoutube}" target="_blank">Continue on YouTube</a>`);
+    }, 1450);
 }
 
 watchSubmit();

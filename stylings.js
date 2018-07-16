@@ -1,6 +1,5 @@
 // code to conditionally style html elements––––––––––
-
-// changing search input/button colors based on focus
+// changing search input/button colors based on focus/focusout
 $('#search-input').focus(function() {
     $('#search-button').css({'color': 'rgb(114, 131, 156)',
 'transition': 'linear .2s'});
@@ -12,7 +11,6 @@ $('#search-input').focusout(function() {
   $('#search-button').css({'color': 'white', 'transition': 'linear .2s'});
   $('#search-input').css({'background': 'rgba(103, 105, 109, .6)', 'transition': 'linear .2s', 'color': 'white'});
 });
-
 
 // changing search input/button colors based on hover
 $('#search-button, #search-input').mouseenter(function(){
