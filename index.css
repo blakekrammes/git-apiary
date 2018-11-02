@@ -11,21 +11,38 @@ html, body {
 }
 
 body {
-  display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-template-rows: repeat(8, [col-start] 1fr);
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.pinimg.com/736x/2e/70/1f/2e701ff7b888245d5e059cafac5a0005--bee-art-bee-keeping.jpg') no-repeat center center fixed;
+  /*display: grid;*/
+  /*grid-template-columns: repeat(12, [col-start] 1fr);*/
+  /*grid-template-rows: repeat(8, [col-start] 1fr);*/
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url('https://i.pinimg.com/736x/2e/70/1f/2e701ff7b888245d5e059cafac5a0005--bee-art-bee-keeping.jpg') no-repeat center center fixed;
   background-size: cover;
 
 }
 
 main {
-  grid-column: col-start 1 / -1;
+  /*grid-column: col-start 1 / -1;*/
   display: grid;
-  grid-template-columns: repeat(12, [col-start] 1fr);
-  background:rgba(0, 0, 0, 0.6);
+  /*grid-template-columns: repeat(12, [col-start] 1fr);*/
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: minmax(100px, auto);
+  /*background:rgba(0, 0, 0, 0.6);*/
   height: 100%;
 } 
+
+.pub-api-div {
+  grid-column: 2 / 6;
+  grid-row: 1 / 4;
+}
+
+.git-div {
+  grid-column: 2 / 6;
+  /*grid-row: 5 / 10;*/
+}
+
+.youtube-div {
+  grid-column: 8 / 12;
+  grid-row: 1 / 9;
+}
 
 fieldset {
   border: none;
@@ -92,13 +109,13 @@ img {
 button {
   font-family: 'Raleway', serif;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 1.5vw;
   cursor: pointer;
   border-radius: 4px;
   border: none;
   transition: linear .2s;
-  width: 10vw;
-  height: 50px;
+  width: 8vw;
+  height: 3vw;
 }
 
 /*.prev-button {
@@ -114,15 +131,17 @@ label {
 }
 
 .title-content {
-  grid-column: col-start / span 24;
-  grid-row-start: span 1;
+  margin-top: -2.3vw;
+  padding-top: 1.5vw;
+  /*grid-column: col-start / span 24;*/
+  /*grid-row-start: span 1;*/
   background: rgba(10,48,85,0.95);
 }
 
 .js-search-form {
   grid-column: col-start / span 12;
   grid-row-start: span 1;
-  background: rgba(0, 0, 0, 0.6);
+  /*background: rgba(0, 0, 0, 0.6);*/
 }
 
 .input-div {
@@ -176,11 +195,12 @@ label {
 }
 
 .pub-api-div {
-  grid-column: col-start / span 12;
-  border: 3px solid rgba(248, 239, 174, .5);
-  width: 80vw;
+  /*grid-column: col-start / span 12;*/
+  border: 3px solid  rgba(205, 210, 255,.35);
+  border-radius: 4px;
+  /*width: 80vw;*/  
   background: rgba(0,0,0,.5);
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   margin-top: 2vw;
 }
 
@@ -203,34 +223,44 @@ label {
 }
 
 .git-div {
-  grid-column: col-start / span 12;
-  border: 3px solid indianred;
+  /*grid-column: col-start / span 12;*/
+  border: 3px solid rgba(205,92,92,.35);
+  border-radius: 4px;
   background: rgba(0,0,0,.3);
-  margin: 0 auto;
-  width: 80vw;
+  /*margin: 0 auto;*/
+  /*width: 80vw;*/
   margin-top: 2vw;
 }
 
+.githubSearchLink, .youtubeSearchLink {
+  font-size: 1.8vw;
+}
+
+.github-api-search-results, .public-api-search-results {
+  padding: 0 2vw;
+}
+
 .youtube-div {
-grid-column: col-start / span 12;
-grid-row-start: span 3;
-border: 3px solid lemonchiffon;
+/*grid-column: col-start / span 12;*/
+/*grid-row-start: span 3;*/
+border: 3px solid rgba(255,250,205,.35);
+border-radius: 4px;
 background: rgba(0,0,0,.2);
-margin: 0 auto;
+/*margin: 0 auto;*/
 margin-top: 2vw;
 margin-bottom: 4vw;
-width: 80vw;
+/*width: 80vw;*/
 } 
 
 .youtube-api-search-results {
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
-  font-size: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  /*font-size: 0;*/
+  display: block;
+  /*flex-direction: row;*/
+  /*flex-wrap: wrap;*/
+  /*justify-content: center;*/
 }
 
 .youtube-result-text {
@@ -239,9 +269,12 @@ width: 80vw;
 }
 
 .youtube-result-li {
-  display: inline-block;
-  width: calc(90% / 5);
-  padding: 0 .7vw;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  /*line-height: 1.5vw;*/
+  padding-bottom: 1vw;
+  /*padding: 0 .7vw;*/
 }
 
 .youtube-thumbnail-container {
@@ -251,12 +284,17 @@ width: 80vw;
 .youtube-thumbnail {
   width: 100%;
   height: auto;
-  padding: 0 .5vw;
+  border: 2px solid rgba(128,128,128,.35);
+  border-radius: 10px;
+}
+
+.youtube-thumbnail:hover {
+  border: 2px solid rgba(255,0,0,.4);
 }
 
 .youtube-thumbnail-title {
   font-size: 1.1vw;
-  position: absolute;
+  /*position: absolute;*/
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -268,8 +306,11 @@ width: 80vw;
 } 
 
 #subheading {
-  margin-bottom: 2em;
-  padding: 0 .5em;
+  padding-bottom: 2vw;
+  margin-top: -25px;
+  line-height: 50px;
+  padding-right: 2vw;
+  padding-left: 2vw; 
 }
 
 #search-input {
@@ -317,31 +358,39 @@ button:hover {
   background: rgba(169, 169, 169, .6);
   transition: linear .2s;
 }
+.you-git-label .search-filter-span:last-of-type {
+  left: -12px;
+}
+
+@media only screen and (max-width: 1300px) {
+  button {
+    font-size: 2vw;
+    width: 10vw;
+    height: 4vw;
+  }
+}
 
 @media only screen and (max-width: 1024px) {
   button {
-    width: 200px;
-    height: 50px;
-    font-size: 28px;
-  }
+  font-size: 2.3vw;
+  width: 12vw;
+  height: 5vw;
+}
   body {
     width: 100%;
   }
   .pub-api-div {
-  grid-column: col-start / span 12;
+  /*grid-column: col-start / span 12;*/
   }
   .public-api-search-results {
     margin-bottom: 20px;
   }
   .public-api-search-results li, .github-api-search-results li {
     display: inline-block;
-    padding: 0 9px;
+    /*padding: 0 9px;*/
   }
   .git-div {
-    grid-column: col-start / span 12;
-  }
-  .youtube-div {
-  margin: 0 auto;
+    /*grid-column: col-start / span 12;*/
   }
   .youtube-result-text {
     margin-bottom: 20px;
@@ -351,30 +400,37 @@ button:hover {
     margin: 0;
     padding: 0;
     font-size: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: wrap;*/
+    /*justify-content: center;*/
   }
   .youtube-result-li {
-    display: inline-block;
-    width: calc(90% / 3);
-    margin: 0;
-    padding: 25px .7vw;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    /*padding: 25px .7vw;*/
   }
   .youtube-thumbnail {
-    padding: 5px;
+    /*padding: 5px;*/
     margin: 0;
   }
   .youtube-thumbnail-title {
     font-size: 1.5vw;
     top: -11.5%;
+    margin-top: .5vw;
+  }
+  .youtubeSearchLink, .githubSearchLink {
+    font-size: 2.5vw;
   }
   #search-input {
       grid-column: col-start 1 / span 12;
     }
   #search-button {
     grid-column: col-start 1 / span 12;
+  }
+  .you-git-label .search-filter-span:last-of-type {
+      left: -12px;
   }
   a:hover, label:hover {
   color: white;
@@ -386,12 +442,58 @@ button:hover {
   }  
 }
 
+@media only screen and (max-width: 850px) {
+  button {
+    color: black;
+    background: white;
+    text-align: center;
+    width: 15.5vw;
+    height: 6.5vw;
+    font-size: 3vw;
+  }
+  #subheading {
+    padding-bottom: 2vw;
+    /*margin-top: -2.2vw;*/
+    /*padding-right: 2vw;
+    padding-left: 2vw; */
+  }
+  .pub-api-div {
+    margin-top: 0vw;
+    grid-column: 2 / 12;
+    grid-row: 2 / 7;
+    margin-top: -12vw;
+  }
+  .git-div {
+    grid-column: 2 / 12;
+    grid-row: 7 / 9;
+  }
+  .youtube-div{
+    grid-column: 2 / 12;
+    grid-row: 12 / 14;
+  }
+  .youtube-result-li {
+    width: 80%;
+    margin-bottom: 2vw;
+  }
+  .youtubeSearchLink, .githubSearchLink {
+    font-size: 3.5vw;
+  }
+  .you-git-label .search-filter-span:last-of-type {
+      left: -12px;
+  }
+  .youtube-thumbnail-title {
+    font-size: 2.5vw;
+  }
+}
+
 @media only screen and (max-width: 700px) {
   button {
-  color: black;
-  background: white;
-  text-align: center;
-  font-size: 16px;
+    color: black;
+    background: white;
+    text-align: center;
+    width: 20.5vw;
+    height: 8vw;
+    font-size: 4.5vw;
   }
   body {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.pinimg.com/736x/2e/70/1f/2e701ff7b888245d5e059cafac5a0005--bee-art-bee-keeping.jpg') no-repeat center center fixed;
@@ -411,18 +513,29 @@ button:hover {
     background: none;
   }
   .youtube-result-li {
-    width: calc(90% / 2);
-    padding: 25px 2.9vw;
+    /*width: calc(90% / 2);*/
+    /*padding: 25px 2.9vw;*/
   }
   .youtube-thumbnail-title {
     font-size: 2.5vw;
     top: -15.5%;
+    margin-top: .7vw;
   }
   .youtube-label .search-filter-span:last-of-type {
     right: -65px;
   }
+  .you-git-label .search-filter-span:last-of-type {
+      left: -12px;
+  }
+  .youtubeSearchLink, .githubSearchLink {
+    font-size: 4vw;
+  }
   #subheading {
-    margin-top: -15px;
+    margin-top: -30px;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    font-size: 5vw;
+    line-height: 45px;
   }
   #search-button {
     font-size: 10px;
@@ -436,9 +549,13 @@ button:hover {
     padding: 0 29px;
     font-size: 16px;
   }
+  
   .subheading {
   font-size: 20px;
   margin-top: -20px;
+  }
+  #subheading {
+    line-height: 35px;
   }
   .checkboxes-div {
     margin-bottom: 40px;
@@ -447,11 +564,22 @@ button:hover {
     top: -50px;
     left: -15px;
   }
+
+  .category-label .search-filter-span:last-of-type {
+      right: -65px;
+  }
+
   .github-label .search-filter-span:last-of-type {
       right: -65px;
   }
   .you-git-label .search-filter-span:last-of-type {
-      left: -20px;
+      left: -2px;
+  }
+  .youtubeSearchLink, .githubSearchLink {
+    font-size: 5.5vw;
+  }
+  .js-search-form {
+    /*margin-left: 14vw;*/
   }
 }
 
@@ -461,7 +589,8 @@ button:hover {
   }
   #subheading {
     font-size: 6vw;
-    line-height: 10vw;
+    line-height: 8vw;
+    margin-top: -20px;
   }
   .result-title {
     font-size: 9vw;
@@ -474,6 +603,22 @@ button:hover {
   .result-li { 
     font-size: 5.5vw;
   }
+  .pub-api-div {
+    margin-top: 0vw;
+    grid-column: 2 / 12;
+    grid-row: 2 / 7;
+  }
+  .git-div {
+    grid-column: 2 / 12;
+    grid-row: 7 / 9;
+  }
+  .youtube-div{
+    grid-column: 2 / 12;
+    grid-row: 12 / 14;
+  }
+  .youtubeSearchLink, .githubSearchLink {
+    font-size: 6vw;
+  }
   .public-api-search-results li {
     padding: 0 .3vw;
   }
@@ -484,27 +629,34 @@ button:hover {
     font-size: 5.5vw;
   }
   label {
-      padding: 0 19px;
-      font-size: 12px;
-    }
-  button {
-    width: 25vw;
-    height: 40px;
+    padding: 0 19px;
+    font-size: 18px;
   }
   .youtube-result-li {
-  width: 90%;
-  padding-bottom: 10px;
+  /*width: 90%;*/
+  /*padding-bottom: 10px;*/
   }
   .youtube-thumbnail-title {
-  font-size: 4.3vw;
-  width: 80vw;
-  margin-top: 4px;
+  font-size: 4vw;
+  /*margin-top: 4px;*/
+  margin-top: -.8vw;
   }
   .category-label .search-filter-span:last-of-type {
-    left: 6px;
+    left: -6.5px;
+    /*top: 99.3px;*/
   }
   .you-git-label .search-filter-span:last-of-type {
-      left: -12px;
+      left: -1px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  label {
+    padding: 0 19px;
+    font-size: 5vw;
+  }
+  .you-git-label .search-filter-span:last-of-type {
+      left: -1px;
   }
 }
 
