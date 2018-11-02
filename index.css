@@ -370,6 +370,12 @@ button:hover {
   }
 }
 
+@media only screen and (max-width: 1200px) {
+  .youtube-result-li {
+    width: 60%;
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   button {
   font-size: 2.3vw;
@@ -407,7 +413,7 @@ button:hover {
   }
   .youtube-result-li {
     display: block;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
     /*padding: 25px .7vw;*/
   }
