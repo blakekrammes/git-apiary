@@ -25,7 +25,7 @@ function getDataFromApiByTitle(searchTerm, callback) {
 //a function to create the result <li>
 function createLI(result) {
   const resultLI = (`
-  <li class="pub-api-result-li"><a class="appender" href="${result.Link}" target="_blank">${result.API}</a><span class="li-divider"> |</span></li>`);
+  <li class="result-li pub-api-result-li"><a class="appender" href="${result.Link}" target="_blank">${result.API}</a><span class="li-divider"> |</span></li>`);
   return resultLI;
 }
 
@@ -138,7 +138,7 @@ function getDataFromGithubApi(gitTerm, gitCallback) {
 //a function to create the result <li> for git search
 function createGitLI(gitResult) {
   const gitResultLI = (`
-  <li class="git-result-li"><a href="${gitResult.html_url}" target="_blank">${gitResult.name}</a> by <a href="${gitResult.owner.html_url}" target="_blank">${gitResult.owner.login}</a><span class="li-divider">   |</span></li>`);
+  <li class="result-li git-result-li"><a href="${gitResult.html_url}" target="_blank">${gitResult.name}</a> by <a href="${gitResult.owner.html_url}" target="_blank">${gitResult.owner.login}</a><span class="li-divider">   |</span></li>`);
   return gitResultLI;
 }
 
@@ -224,7 +224,7 @@ function getDataFromYoutubeApi(youtubeTerm, youtubeCallback) {
 //creates individual result <li> for each youtube search result
 function createYoutubeLI(youtubeResult) {
   const youtubeResultLI = (`
-  <li class="youtube-result-li"><a class="youtube-link" href="${YOUTUBE_VIDEO_URL}${youtubeResult.id.videoId}" target="_blank"><div class="youtube-thumbnail-container"><img src="${youtubeResult.snippet.thumbnails.medium.url}" alt="videoImage" class="youtube-thumbnail"><div class="youtube-thumbnail-title">${youtubeResult.snippet.title}</div></div></a></li>`);
+  <li class="result-li youtube-result-li"><a class="youtube-link" href="${YOUTUBE_VIDEO_URL}${youtubeResult.id.videoId}" target="_blank"><div class="youtube-thumbnail-container"><img src="${youtubeResult.snippet.thumbnails.medium.url}" alt="videoImage" class="youtube-thumbnail"><div class="youtube-thumbnail-title">${youtubeResult.snippet.title}</div></div></a></li>`);
   return youtubeResultLI;
 }
 
@@ -286,6 +286,9 @@ function listenForYoutubePageTokenClicks(searchResults, pageTotal, index1, index
     else if (currentPage == 1) { $('.prev-youtube-token').prop('hidden', true); }
   })
 }
+
+
+$('.pub-api-div, .git-div, .youtube-div').css('display', 'none');
 
 //_____________________________________________________
 // watches for the search form to be submitted and sends the search/query value from the user's input to the various getDataFromApi functions

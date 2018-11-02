@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Git Apiary</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/png" href="bee.png">
     <link href="index.css" rel="stylesheet" type="text/css" />
     <link href="hexagons.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Raleway:200" rel="stylesheet">
@@ -62,42 +63,42 @@
     <main role="main" class="js-search-results" aria-live="assertive" aria-atomic="true" hidden>
       <section class="pub-api-div" name="public-api-search-results-container" role="region" region="public-api-results">
         <header>
-          <h2 class="result-text" hidden aria-live="polite"></h2>
+          <h2 class="result-title result-text" hidden aria-live="polite"></h2>
         </header>
-        <ul class="public-api-search-results" hidden aria-live="polite">
+        <ul class="result-ul public-api-search-results" hidden aria-live="polite">
         </ul>
         <div class="no-results-message-container" hidden></div>
         <div class="buttons">
-          <button class="prev-token" hidden>Previous</button>
-          <button class="next-token" hidden>Next</button>
+          <button class="prev-button prev-token" hidden>Previous</button>
+          <button class="next-button next-token" hidden>Next</button>
         </div>
-        <p class="pagination" hidden></p>
+        <p class="pages pagination" hidden></p>
       </section>
       <section class="git-div" name="github-api-search-results-container" role="region" region="github-api-results" aria-live="polite">
         <header>
-          <h2 class="git-result-text" hidden></h2>
+          <h2 class="result-title git-result-text" hidden></h2>
         </header>
-        <ul class="github-api-search-results" hidden>
+        <ul class="result-ul github-api-search-results" hidden>
         </ul>
         <h2 class="githubSearchLink" hidden></h2>
         <div class="git-buttons" >
-          <button class="prev-git-token" hidden>Previous</button>
-          <button class="next-git-token" hidden>Next</button>
+          <button class="prev-button prev-git-token" hidden>Previous</button>
+          <button class="next-button next-git-token" hidden>Next</button>
         </div>
-        <p class="git-pagination" hidden></p>
+        <p class="pages git-pagination" hidden></p>
       </section>
       <section class="youtube-div" ame="youtube-api-search-results-container" role="region" region="youtube-api-results" aria-live="polite">
         <header>
-          <h2 class="youtube-result-text" hidden></h2>
+          <h2 class="result-title youtube-result-text" hidden></h2>
         </header>
-        <ul class="youtube-api-search-results" hidden>
+        <ul class="result-ul youtube-api-search-results" hidden>
         </ul>
         <h2 class="youtubeSearchLink" hidden></h2>
         <div class="youtube-buttons">
-          <button class="prev-youtube-token" hidden>Previous</button>
-          <button class="next-youtube-token" hidden>Next</button>
+          <button class="prev-button prev-youtube-token" hidden>Previous</button>
+          <button class="next-button next-youtube-token" hidden>Next</button>
         </div>
-        <p class="youtube-pagination" hidden></p>
+        <p class="pages youtube-pagination" hidden></p>
       </section>
     </main>
     <script src="index.js"></script>

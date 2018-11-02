@@ -97,9 +97,17 @@ button {
   border-radius: 4px;
   border: none;
   transition: linear .2s;
-  width: 150px;
+  width: 10vw;
   height: 50px;
 }
+
+/*.prev-button {
+  margin-right: 2vw;
+}
+
+.next-button {
+  margin-left: 2vw;
+}*/
 
 label {
   font-size: 22px;
@@ -139,6 +147,10 @@ label {
   text-align: center;
 }
 
+.li-divider {
+  display: inline;
+}
+
 .search-filter-span-positioner {
   position: relative;
   text-align: center;
@@ -159,17 +171,21 @@ label {
   left: -5px;
 }
 
-.li-divider {
-  display: none;
-}
-
 .buttons, .git-buttons, .youtube-buttons {
   text-align: center; 
 }
 
 .pub-api-div {
-  grid-column: col-start / span 6;
-  grid-row-start: span 1;
+  grid-column: col-start / span 12;
+  border: 3px solid rgba(248, 239, 174, .5);
+  width: 80vw;
+  background: rgba(0,0,0,.5);
+  margin: 0 auto;
+  margin-top: 2vw;
+}
+
+.result-li {
+  display: inline-block;
 }
 
 .pub-api-result-li, .git-result-li {
@@ -179,7 +195,7 @@ label {
 }
 
 .public-api-search-results {
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .no-results-message-container {
@@ -187,13 +203,23 @@ label {
 }
 
 .git-div {
-  grid-column: col-start 7 / span 6;
-  grid-row-start: span 1;
+  grid-column: col-start / span 12;
+  border: 3px solid indianred;
+  background: rgba(0,0,0,.3);
+  margin: 0 auto;
+  width: 80vw;
+  margin-top: 2vw;
 }
 
 .youtube-div {
 grid-column: col-start / span 12;
 grid-row-start: span 3;
+border: 3px solid lemonchiffon;
+background: rgba(0,0,0,.2);
+margin: 0 auto;
+margin-top: 2vw;
+margin-bottom: 4vw;
+width: 80vw;
 } 
 
 .youtube-api-search-results {
@@ -214,7 +240,8 @@ grid-row-start: span 3;
 
 .youtube-result-li {
   display: inline-block;
-  width: calc(100% / 5)
+  width: calc(90% / 5);
+  padding: 0 .7vw;
 }
 
 .youtube-thumbnail-container {
@@ -228,8 +255,7 @@ grid-row-start: span 3;
 }
 
 .youtube-thumbnail-title {
-  font-size: 1.2vw;
-  width: 19vw;
+  font-size: 1.1vw;
   position: absolute;
   white-space: nowrap;
   overflow: hidden;
@@ -311,9 +337,6 @@ button:hover {
     display: inline-block;
     padding: 0 9px;
   }
-  .li-divider {
-  display: inline;
-  }
   .git-div {
     grid-column: col-start / span 12;
   }
@@ -335,9 +358,9 @@ button:hover {
   }
   .youtube-result-li {
     display: inline-block;
-    width: calc(100% / 3);
+    width: calc(90% / 3);
     margin: 0;
-    padding-top: 25px;
+    padding: 25px .7vw;
   }
   .youtube-thumbnail {
     padding: 5px;
@@ -345,7 +368,6 @@ button:hover {
   }
   .youtube-thumbnail-title {
     font-size: 1.5vw;
-    width: 31vw;
     top: -11.5%;
   }
   #search-input {
@@ -389,12 +411,12 @@ button:hover {
     background: none;
   }
   .youtube-result-li {
-    width: calc(100% / 2);
+    width: calc(90% / 2);
+    padding: 25px 2.9vw;
   }
   .youtube-thumbnail-title {
     font-size: 2.5vw;
-    width: 46vw;
-    top: -12.5%;
+    top: -15.5%;
   }
   .youtube-label .search-filter-span:last-of-type {
     right: -65px;
@@ -434,24 +456,49 @@ button:hover {
 }
 
 @media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 10vw;
+  }
+  #subheading {
+    font-size: 6vw;
+    line-height: 10vw;
+  }
+  .result-title {
+    font-size: 9vw;
+  }
+  .git-div.result-ul:not(:first-child) {
+    margin-left: -10vw;
+    /*font-size: 10vw;*/
+    color: blue;
+  }
+  .result-li { 
+    font-size: 5.5vw;
+  }
+  .public-api-search-results li {
+    padding: 0 .3vw;
+  }
+  .pages {
+    font-size: 6vw;
+  }
   a {
-    font-size: 25px;
+    font-size: 5.5vw;
   }
   label {
       padding: 0 19px;
       font-size: 12px;
     }
   button {
-    width: 150px;
+    width: 25vw;
+    height: 40px;
   }
   .youtube-result-li {
-  width: 100%;
+  width: 90%;
   padding-bottom: 10px;
   }
   .youtube-thumbnail-title {
   font-size: 4.3vw;
-  width: 90vw;
-  margin-top: 10px;
+  width: 80vw;
+  margin-top: 4px;
   }
   .category-label .search-filter-span:last-of-type {
     left: 6px;
