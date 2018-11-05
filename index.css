@@ -24,7 +24,7 @@ main {
   display: grid;
   /*grid-template-columns: repeat(12, [col-start] 1fr);*/
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: minmax(100px, auto);
+  grid-auto-rows: min-content;
   /*background:rgba(0, 0, 0, 0.6);*/
   height: 100%;
 } 
@@ -467,7 +467,7 @@ button:hover {
     margin-top: 0vw;
     grid-column: 2 / 12;
     grid-row: 2 / 7;
-    margin-top: -12vw;
+    margin-top: 2vw;
   }
   .git-div {
     grid-column: 2 / 12;
@@ -587,6 +587,9 @@ button:hover {
   .js-search-form {
     /*margin-left: 14vw;*/
   }
+  .pub-api-div {
+    margin-top: 4vw;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -610,7 +613,7 @@ button:hover {
     font-size: 5.5vw;
   }
   .pub-api-div {
-    margin-top: 0vw;
+    margin-top: 6vw;
     grid-column: 2 / 12;
     grid-row: 2 / 7;
   }

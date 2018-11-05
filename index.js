@@ -309,15 +309,19 @@ function watchSubmit() {
     // reset input val
     searchTarget.val('');
     if ($('#category-box').is(':checked')) {
+      // $('.git-div').css('grid-row', '0');
       triggerSearchByCategory(searchWord);
     }
     else if ($('#github-box').is(':checked')) {
+      // $('.git-div').css('grid-row', '1 / 5');
       triggerSearchByGithub(searchWord, githubLink);
     }
     else if ($('#youtube-box').is(':checked')) {
+      // $('.git-div').css('grid-row', '0');
       triggerSearchByYoutube(searchWord, youtubeLink);
     }
     else if ($('#you-git-box').is(':checked')) {
+      // $('.git-div').css('grid-row', '1 / 5');
       triggerSearchByGithubAndYoutube(searchWord, githubLink, youtubeLink);
     }
     else {
