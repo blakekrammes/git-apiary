@@ -1,7 +1,7 @@
 # Git Apiary
 ## An app to search public APIs, related GitHub repositories and YouTube tutorials simultaneously
 
-### Link to live site: https://blakesters.github.io/git-apiary/
+### Link to live site: https://blakekrammes.github.io/git-apiary/
 
 ## Screenshots:
 
